@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Attendance</title>
+    <style>
+        body { font-family: Arial, sans-serif; background: #f4f4f4; margin: 0; padding: 0; }
+        .container { max-width: 800px; margin: 40px auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { color: #333; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: left; }
+        th { background: #f8f8f8; }
+        .btn { display: inline-block; padding: 10px 20px; background: #007bff; color: #fff; border: none; border-radius: 4px; text-decoration: none; margin: 10px 0; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        .message { color: #d9534f; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Face Recognition Attendance</h1>
+        <p>Date: {{ datetoday2 }}</p>
+        <p>Total Registered Users: {{ totalreg }}</p>
+        {% if mess %}
+            <div class="message">{{ mess }}</div>
+        {% endif %}
+        <form action="/start" method="get">
+            <button class="btn" type="submit">Take Attendance</button>
+        </form>
+        <form action="/add" method="post">
+            <input type="text" name="newusername" placeholder="Enter Name" required>
+            <input type="text" name="newuserid" placeholder="Enter Roll Number" required>
+            <button class="btn" type="submit">Add New User</button>
+        </form>
+        <h2>Today's Attendance</h2>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Roll</th>
+                <th>Time</th>
+            </tr>
+            {% for i in range(l) %}
+            <tr>
+                <td>{{ names[i] }}</td>
+                <td>{{ rolls[i] }}</td>
+                <td>{{ times[i] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>
